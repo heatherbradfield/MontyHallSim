@@ -26,16 +26,18 @@ public class Sim extends JApplet {
         String door_str = "Images/door_close";
         ImageIcon icon;
         for (int i = 0; i < NUM_DOORS; i++) {
-            doors[i] = new ImageIcon(getClass().getResource(door_str + (i+1) + ".png"));
+            icon = new ImageIcon(getClass().getResource(door_str + (i+1) + ".png"));
+            icon.setDescription(i + "");
+            doors[i] = icon;
             if (i < NUM_DOORS-1)
             {
-                icon = new ImageIcon(getClass().getResource("Images/goat.png"));
+                icon = new ImageIcon(getClass().getResource("Images/goat3.png"));
                 icon.setDescription("goat");
                 objects[i] =icon;
             }
             else
             {
-                icon = new ImageIcon(getClass().getResource("Images/car.png"));
+                icon = new ImageIcon(getClass().getResource("Images/car3.png"));
                 icon.setDescription("car");
                 objects[i] = icon;
             }
@@ -49,7 +51,7 @@ public class Sim extends JApplet {
                 }
             });
         } catch (Exception e) {
-            System.err.println("createGUI didn't successfully complete");
+            System.err.println("\"createGUI\" didn't successfully complete");
             System.exit(0);
         }
     }
