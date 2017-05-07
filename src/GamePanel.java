@@ -1,12 +1,7 @@
 import javax.swing.*;
-import java.awt.*;
 import java.applet.*;
-import java.net.URL;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Random;
 
 /**
@@ -17,11 +12,23 @@ import java.util.Random;
  * @version 09/19/2016
  */
 public class GamePanel extends JPanel {
-    String soundKey = "";
-    AudioClip clip;
     JLabel congrats = new JLabel("YOU WIN!", SwingConstants.CENTER);
     JLabel rip = new JLabel("YOU LOSE", SwingConstants.CENTER);
+    public static final int MAX_CLICKS = 2;
+    boolean open_door = false;
 
+    public class DoorModel extends JToggleButton.ToggleButtonModel {
+        public void reset() {
+            super.setSelected(false);
+        }
+
+        @Override
+        public void setSelected(boolean b) {
+            if (!isSelected() && open_door) {
+                super.setSelected(b);
+            }
+        }
+    }
     /**
      * Creates a hash map of animal names and their corresponding sounds.
      * Creates a sound button and plays a random animal sound.
@@ -38,9 +45,23 @@ public class GamePanel extends JPanel {
 
         shuffleObjects();
         for (int i = 0; i < Sim.NUM_DOORS; i++) {
+            final int index = i;
             JToggleButton btn = new JToggleButton();
+            btn.setModel(new DoorModel());
             btn.setIcon(Sim.doors[i]);
             btn.setSelectedIcon(Sim.objects[i]);
+            btn.addActionListener(new ActionListener() {
+                /**
+                 * Changes panel back to Main Menu.
+                 *
+                 * @param e the mouseClicked or mousePressed event.
+                 */
+                public void actionPerformed(ActionEvent e) {
+                    //open_door = true;
+                    System.out.println(((ImageIcon)btn.getIcon()).getDescription());
+                    openDoor(Integer.parseInt(((ImageIcon)btn.getIcon()).getDescription().replaceAll("\\D+","")));
+                }
+            });
             add(btn);
         }
 
@@ -63,7 +84,7 @@ public class GamePanel extends JPanel {
     }
 
     public void openDoor(int i) {
-
+        System.out.println(i);
 
     }
 

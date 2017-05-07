@@ -23,8 +23,9 @@ public class Sim extends JApplet {
         objects = new Icon[NUM_DOORS];
         door_open = new ImageIcon(getClass().getResource("Images/door_open.png"));
 
+        String door_str = "Images/door_close";
         for (int i = 0; i < NUM_DOORS; i++) {
-            doors[i] = new ImageIcon(getClass().getResource("Images/door_close.png"));
+            doors[i] = new ImageIcon(getClass().getResource(door_str + (i+1) + ".png"));
             if (i < NUM_DOORS-1) objects[i] = new ImageIcon(getClass().getResource("Images/goat.png"));
             else objects[i] = new ImageIcon(getClass().getResource("Images/car.png"));
         }
