@@ -8,18 +8,22 @@ import java.util.ArrayList;
 
 /**
  * The actual game.
- * Generates animal images and sounds.
+ * Generates doors, goats, and car.
  *
  * @author Heather Bradfield
- * @version 09/19/2016
+ * @version 05/06/2017
  */
 public class GamePanel extends JPanel {
     JLabel congrats = new JLabel("YOU WIN!", SwingConstants.CENTER);
     JLabel rip = new JLabel("YOU LOSE", SwingConstants.CENTER);
+
     ArrayList<JToggleButton> buttons = new ArrayList<>();
     int clicks = 0;
     public static final int MAX_CLICKS = 2;
 
+    /**
+     * Custom model for JToggleButton doors.
+     */
     public class DoorModel extends JToggleButton.ToggleButtonModel {
         public void reset() {
             super.setSelected(false);
@@ -33,12 +37,10 @@ public class GamePanel extends JPanel {
         }
     }
     /**
-     * Creates a hash map of animal names and their corresponding sounds.
-     * Creates a sound button and plays a random animal sound.
-     * Displays images and makes logic checks (user clicked on correct animal).
-     * @param newSim The Animal Sounds applet.
+     * Creates an ArrayList of door buttons with goat or car behind each.
+     * Displays images and makes logic checks (user clicked on car or goat).
+     * @param newSim The Monty Hall Sim applet.
      */
-
     public GamePanel(final Sim newSim) {
 
 //        congrats.setFont(new Font("Chalkboard", Font.BOLD, 26));
@@ -54,12 +56,11 @@ public class GamePanel extends JPanel {
             btn.setSelectedIcon(Sim.objects[i]);
             btn.addActionListener(new ActionListener() {
                 /**
-                 * Changes panel back to Main Menu.
+                 * Opens one door with goat behind it or final decision door.
                  *
                  * @param e the mouseClicked or mousePressed event.
                  */
                 public void actionPerformed(ActionEvent e) {
-                    //open_door = true;
                     clicks++;
                     System.out.println(((ImageIcon)btn.getIcon()).getDescription());
                     openDoor(Integer.parseInt(((ImageIcon)btn.getIcon()).getDescription().replaceAll("\\D+","")));
@@ -87,6 +88,10 @@ public class GamePanel extends JPanel {
         add(menu);
     }
 
+    /**
+     * Checks which door was chosen and if not final decsion click, opens goat door.
+     * @param i index of door.
+     */
     public void openDoor(int i) {
         System.out.println(i);
         boolean done = false;
@@ -101,10 +106,16 @@ public class GamePanel extends JPanel {
         }
     }
 
+    /**
+     * Asks contestant if they would like to stay or switch.
+     */
     public void askContestant() {
 
     }
 
+    /**
+     * Shuffles goats and car.
+     */
     public void shuffleObjects() {
         Random rand = new Random();
         int j;
@@ -114,6 +125,9 @@ public class GamePanel extends JPanel {
         }
     }
 
+    /**
+     * Swaps two objects.
+     */
     public void swap(int i, int j){
         Icon temp = Sim.objects[i];
         Sim.objects[i] = Sim.objects[j];
