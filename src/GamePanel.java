@@ -2,7 +2,9 @@ import javax.swing.*;
 import java.applet.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.Array;
 import java.util.Random;
+import java.util.ArrayList;
 
 /**
  * The actual game.
@@ -14,8 +16,9 @@ import java.util.Random;
 public class GamePanel extends JPanel {
     JLabel congrats = new JLabel("YOU WIN!", SwingConstants.CENTER);
     JLabel rip = new JLabel("YOU LOSE", SwingConstants.CENTER);
+    ArrayList<JToggleButton> buttons = new ArrayList<>();
+    int clicks = 0;
     public static final int MAX_CLICKS = 2;
-    boolean open_door = false;
 
     public class DoorModel extends JToggleButton.ToggleButtonModel {
         public void reset() {
@@ -24,7 +27,7 @@ public class GamePanel extends JPanel {
 
         @Override
         public void setSelected(boolean b) {
-            if (!isSelected() && open_door) {
+            if (clicks >= 1 && clicks < MAX_CLICKS + 1) {
                 super.setSelected(b);
             }
         }
@@ -45,7 +48,6 @@ public class GamePanel extends JPanel {
 
         shuffleObjects();
         for (int i = 0; i < Sim.NUM_DOORS; i++) {
-            final int index = i;
             JToggleButton btn = new JToggleButton();
             btn.setModel(new DoorModel());
             btn.setIcon(Sim.doors[i]);
@@ -58,10 +60,12 @@ public class GamePanel extends JPanel {
                  */
                 public void actionPerformed(ActionEvent e) {
                     //open_door = true;
+                    clicks++;
                     System.out.println(((ImageIcon)btn.getIcon()).getDescription());
                     openDoor(Integer.parseInt(((ImageIcon)btn.getIcon()).getDescription().replaceAll("\\D+","")));
                 }
             });
+            buttons.add(btn);
             add(btn);
         }
 
@@ -85,10 +89,19 @@ public class GamePanel extends JPanel {
 
     public void openDoor(int i) {
         System.out.println(i);
-
+        boolean done = false;
+        if (clicks <  MAX_CLICKS) {
+            for (int j = 0; j < Sim.NUM_DOORS && !done; j++) {
+                if (j != (i-1) && ((ImageIcon) Sim.objects[j]).getDescription().equalsIgnoreCase("goat")) {
+                    System.out.println("opening door: " + (j+1) + "\n");
+                    buttons.get(j).setSelected(true);
+                    done = true;
+                }
+            }
+        }
     }
 
-    public void askContestant(int i) {
+    public void askContestant() {
 
     }
 
