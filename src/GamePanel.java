@@ -17,6 +17,13 @@ public class GamePanel extends JPanel {
     JLabel congrats = new JLabel("YOU WIN!", SwingConstants.CENTER);
     JLabel rip = new JLabel("YOU LOSE", SwingConstants.CENTER);
     JLabel question;
+    public static int winSwitch = 0;
+    public static int loseSwitch = 0;
+    public static int winStay = 0;
+    public static int loseStay = 0;
+    public static int totalGames = 0;
+    public static int firstDoorChosen = 0;
+    public static int secondDoorChosen = 0;
 
     ArrayList<JToggleButton> buttons = new ArrayList<>();
     int clicks = 0;
@@ -77,12 +84,12 @@ public class GamePanel extends JPanel {
             add(btn);
         }
 
-        congrats.setFont(new Font("Chalkboard", Font.BOLD, 26));
+        congrats.setFont(new Font("Impact", Font.BOLD, 26));
         congrats.setForeground(Color.BLUE);
         congrats.setVisible(false);
         add(congrats);
 
-        rip.setFont(new Font("Chalkboard", Font.BOLD, 26));
+        rip.setFont(new Font("Impact", Font.BOLD, 26));
         rip.setForeground(Color.RED);
         rip.setVisible(false);
         add(rip);
@@ -111,6 +118,15 @@ public class GamePanel extends JPanel {
         clicks++;
         boolean done = false;
 
+        if (clicks == 1) {
+            firstDoorChosen = i;
+            System.out.println("First door chosen: " + firstDoorChosen);
+        }
+        if (clicks == 2) {
+            secondDoorChosen = i;
+            System.out.println("Second door chosen: " + secondDoorChosen);
+        }
+
         if (clicks <=  MAX_CLICKS-1) {
             for (int j = 0; j < Sim.NUM_DOORS && !done; j++) {
                 if (j != i && ((ImageIcon) Sim.objects[j]).getDescription().equalsIgnoreCase("goat")) {
@@ -134,11 +150,22 @@ public class GamePanel extends JPanel {
         if (clicks == MAX_CLICKS) {
             question.setVisible(false);
             if (success) {
+                if (firstDoorChosen == secondDoorChosen) winStay++;
+                else winSwitch++;
                 congrats.setVisible(true);
             } else {
+                if (firstDoorChosen == secondDoorChosen) loseStay++;
+                else loseSwitch++;
                 rip.setVisible(true);
             }
         }
+
+        totalGames++;
+
+        System.out.println("Number of wins when we switch: " + winSwitch + "/" + totalGames);
+        System.out.println("Number of wins when we stayed: " + winStay + "/" + totalGames);
+        System.out.println("Number of loses when we switch: " + loseSwitch + "/" + totalGames);
+        System.out.println("Number of loses when we stay: " + loseStay + "/" + totalGames);
     }
 
     /**
@@ -147,7 +174,7 @@ public class GamePanel extends JPanel {
      */
     public void askContestant(int i) {
         question = new JLabel("You chose DOOR " + (i+1) + ". You can switch or stay.", SwingConstants.CENTER);
-        question.setFont(new Font("Chalkboard", Font.BOLD, 26));
+        question.setFont(new Font("Impact", Font.BOLD, 26));
         question.setForeground(Color.magenta);
         question.setVisible(true);
         add(question);

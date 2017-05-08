@@ -22,7 +22,7 @@ public class MenuPanel extends JPanel {
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
         JLabel name = new JLabel("Monty Hall Simulation",SwingConstants.CENTER);
-        name.setFont(new Font("Chalkboard", Font.BOLD, 32));
+        name.setFont(new Font("Impact", Font.BOLD, 32));
         name.setForeground(Color.BLUE);
         add(name,gbc);
 
@@ -38,7 +38,7 @@ public class MenuPanel extends JPanel {
         });
         add(game,gbc);
 
-        JButton quit= new JButton("Quit");
+        JButton quit = new JButton("Quit");
         quit.addActionListener(new ActionListener(){
             /**
              * Terminates the applet.
