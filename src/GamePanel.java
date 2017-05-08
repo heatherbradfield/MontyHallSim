@@ -16,6 +16,7 @@ import java.util.ArrayList;
 public class GamePanel extends JPanel {
     JLabel congrats = new JLabel("YOU WIN!", SwingConstants.CENTER);
     JLabel rip = new JLabel("YOU LOSE", SwingConstants.CENTER);
+    JLabel question;
 
     ArrayList<JToggleButton> buttons = new ArrayList<>();
     int clicks = 0;
@@ -48,8 +49,14 @@ public class GamePanel extends JPanel {
             shuffleObjects();
         }
         catch (Exception e) {
-            System.err.println("Error shuffling objects");
+            System.err.println("MEH");
+            //System.out.println(e.getCause().toString());
         }
+
+        for (int i = 0; i < Sim.NUM_DOORS; i++) {
+            System.out.print(((ImageIcon)Sim.objects[i]).getDescription() + " ");
+        }
+        System.out.println();
 
         for (int i = 0; i < Sim.NUM_DOORS; i++) {
             JToggleButton btn = new JToggleButton();
@@ -59,11 +66,10 @@ public class GamePanel extends JPanel {
             btn.addActionListener(new ActionListener() {
                 /**
                  * Opens one door with goat behind it or final decision door.
-                 *
                  * @param e the mouseClicked or mousePressed event.
                  */
                 public void actionPerformed(ActionEvent e) {
-                    System.out.println(((ImageIcon)btn.getIcon()).getDescription());
+                    //System.out.println(((ImageIcon)btn.getIcon()).getDescription());
                     openDoor(Integer.parseInt(((ImageIcon)btn.getIcon()).getDescription()));
                 }
             });
@@ -85,7 +91,6 @@ public class GamePanel extends JPanel {
         menu.addActionListener(new ActionListener() {
             /**
              * Changes panel back to Main Menu.
-             *
              * @param e the mouseClicked or mousePressed event.
              */
             public void actionPerformed(ActionEvent e) {
@@ -104,13 +109,14 @@ public class GamePanel extends JPanel {
      */
     public void openDoor(int i) {
         clicks++;
-        System.out.println(i);
         boolean done = false;
+
         if (clicks <=  MAX_CLICKS-1) {
             for (int j = 0; j < Sim.NUM_DOORS && !done; j++) {
                 if (j != i && ((ImageIcon) Sim.objects[j]).getDescription().equalsIgnoreCase("goat")) {
                     System.out.println("opening door: " + (j+1) + "\n");
                     buttons.get(j).setSelected(true);
+                    askContestant(i);
                     done = true;
                 }
             }
@@ -126,6 +132,7 @@ public class GamePanel extends JPanel {
      */
     public void gameOver(boolean success) {
         if (clicks == MAX_CLICKS) {
+            question.setVisible(false);
             if (success) {
                 congrats.setVisible(true);
             } else {
@@ -136,9 +143,15 @@ public class GamePanel extends JPanel {
 
     /**
      * Asks contestant if they would like to stay or switch.
+     * @param i the door number selected by the contestant.
      */
-    public void askContestant() {
-
+    public void askContestant(int i) {
+        question = new JLabel("You chose DOOR " + (i+1) + ". You can switch or stay.", SwingConstants.CENTER);
+        question.setFont(new Font("Chalkboard", Font.BOLD, 26));
+        question.setForeground(Color.magenta);
+        question.setVisible(true);
+        add(question);
+        validate();
     }
 
     /**
@@ -147,7 +160,7 @@ public class GamePanel extends JPanel {
     public void shuffleObjects() {
         Random rand = new Random();
         int j;
-        for (int i = Sim.NUM_DOORS-1; i>=0; i--) {
+        for (int i = Sim.NUM_DOORS-1; i>0; i--) {
             j = rand.nextInt() % (i+1);
             swap(i,j);
         }
