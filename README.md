@@ -10,7 +10,7 @@ A short description of the motivation behind the creation and maintenance of the
 
 Clone repo
 ```bash
-cd MontyHallSim
+cd ~/YOUR_PATH/MontyHallSim
 javac Sim.java
 appletviewer Sim.html
 ```
