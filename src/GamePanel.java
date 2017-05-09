@@ -120,11 +120,11 @@ public class GamePanel extends JPanel {
 
         if (clicks == 1) {
             firstDoorChosen = i;
-            System.out.println("First door chosen: " + firstDoorChosen);
+            System.out.println("First door chosen: " + firstDoorChosen + 1);
         }
         if (clicks == 2) {
             secondDoorChosen = i;
-            System.out.println("Second door chosen: " + secondDoorChosen);
+            System.out.println("Second door chosen: " + secondDoorChosen + 1);
         }
 
         if (clicks <=  MAX_CLICKS-1) {
@@ -132,6 +132,7 @@ public class GamePanel extends JPanel {
                 if (j != i && ((ImageIcon) Sim.objects[j]).getDescription().equalsIgnoreCase("goat")) {
                     System.out.println("opening door: " + (j+1) + "\n");
                     buttons.get(j).setSelected(true);
+                    buttons.get(j).setEnabled(false);
                     askContestant(i);
                     done = true;
                 }
