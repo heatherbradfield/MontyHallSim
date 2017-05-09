@@ -21,12 +21,14 @@ public class MenuPanel extends JPanel {
         gbc.gridwidth = GridBagConstraints.REMAINDER;
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
+        setBackground(Color.BLACK);
+
         JLabel name = new JLabel("Monty Hall Simulation",SwingConstants.CENTER);
         name.setFont(new Font("Impact", Font.BOLD, 32));
         name.setForeground(Color.BLUE);
         add(name,gbc);
 
-        JButton game= new JButton("Play");
+        JButton game = new JButton("Play (3 Doors)");
         game.addActionListener(new ActionListener(){
             /**
              * Starts game.

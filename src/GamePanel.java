@@ -52,6 +52,8 @@ public class GamePanel extends JPanel {
     public GamePanel(final Sim newSim) {
         clicks = 0;
 
+        setBackground(new Color(179,0,255));
+
         try {
             shuffleObjects();
         }
@@ -70,6 +72,8 @@ public class GamePanel extends JPanel {
             btn.setModel(new DoorModel());
             btn.setIcon(Sim.doors[i]);
             btn.setSelectedIcon(Sim.objects[i]);
+            btn.setDisabledIcon(Sim.doors[i]);
+            btn.setDisabledSelectedIcon(Sim.objects[i]);
             btn.addActionListener(new ActionListener() {
                 /**
                  * Opens one door with goat behind it or final decision door.
@@ -120,11 +124,11 @@ public class GamePanel extends JPanel {
 
         if (clicks == 1) {
             firstDoorChosen = i;
-            System.out.println("First door chosen: " + firstDoorChosen + 1);
+            System.out.println("First door chosen: " + (firstDoorChosen + 1));
         }
         if (clicks == 2) {
             secondDoorChosen = i;
-            System.out.println("Second door chosen: " + secondDoorChosen + 1);
+            System.out.println("Second door chosen: " + (secondDoorChosen + 1));
         }
 
         if (clicks <=  MAX_CLICKS-1) {
@@ -148,6 +152,10 @@ public class GamePanel extends JPanel {
      * @param success whether the contestant won or not.
      */
     public void gameOver(boolean success) {
+        for (int i = 0; i < Sim.NUM_DOORS; i++) {
+            buttons.get(i).setEnabled(false);
+        }
+
         if (clicks == MAX_CLICKS) {
             question.setVisible(false);
             if (success) {

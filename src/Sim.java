@@ -33,6 +33,8 @@ public class Sim extends JApplet {
             {
                 icon = new ImageIcon(getClass().getResource("Images/goat3.png"));
                 icon.setDescription("goat");
+
+
                 objects[i] = icon;
             }
             else
