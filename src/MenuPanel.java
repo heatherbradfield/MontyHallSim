@@ -40,6 +40,18 @@ public class MenuPanel extends JPanel {
         });
         add(game,gbc);
 
+        JButton stats = new JButton("Statistics");
+        stats.addActionListener(new ActionListener(){
+            /**
+             * Starts game.
+             * @param e The mouseClicked or mouseClicked event.
+             */
+            public void actionPerformed(ActionEvent e){
+                newSim.swapCard(Sim.statsPan);
+            }
+        });
+        add(stats,gbc);
+
         JButton quit = new JButton("Quit");
         quit.addActionListener(new ActionListener(){
             /**

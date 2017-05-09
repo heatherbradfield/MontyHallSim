@@ -1,6 +1,8 @@
 /**
  * Created by Heather on 5/6/17.
  */
+import com.sun.org.glassfish.external.statistics.Stats;
+
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JApplet;
@@ -17,6 +19,7 @@ public class Sim extends JApplet {
     public JPanel mainPanel = new JPanel(cardlayout);
     public static final String menuPan = "Menu";
     public static final String gamePan = "Game";
+    public static final String statsPan = "Statistics";
 
     public void init() {
         doors = new Icon[NUM_DOORS];
@@ -33,8 +36,6 @@ public class Sim extends JApplet {
             {
                 icon = new ImageIcon(getClass().getResource("Images/goat3.png"));
                 icon.setDescription("goat");
-
-
                 objects[i] = icon;
             }
             else
@@ -61,9 +62,11 @@ public class Sim extends JApplet {
     public void createGUI() {
         MenuPanel menu = new MenuPanel(this);
         GamePanel game = new GamePanel(this);
+        StatsPanel stats = new StatsPanel(this);
 
         mainPanel.add(menu, menuPan);
         mainPanel.add(game, gamePan);
+        mainPanel.add(stats, statsPan);
         getContentPane().add(mainPanel);
     }
 
