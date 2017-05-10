@@ -53,7 +53,7 @@ public class GamePanel extends JPanel {
         clicks = 0;
         Sim.num_games++;
 
-        setBackground(new Color(179,0,255));
+        setBackground(Sim.lightBlue);
 
         try {
             shuffleObjects();
@@ -95,7 +95,7 @@ public class GamePanel extends JPanel {
         add(congrats);
 
         rip.setFont(new Font("Impact", Font.BOLD, 26));
-        rip.setForeground(Color.RED);
+        rip.setForeground(Sim.bloodRed);
         rip.setVisible(false);
         add(rip);
 
@@ -186,7 +186,7 @@ public class GamePanel extends JPanel {
     public void askContestant(int i) {
         question = new JLabel("You chose DOOR " + (i+1) + ". You can switch or stay.", SwingConstants.CENTER);
         question.setFont(new Font("Impact", Font.BOLD, 26));
-        question.setForeground(Color.magenta);
+        question.setForeground(new Color(46,136,86));
         question.setVisible(true);
         add(question);
         validate();

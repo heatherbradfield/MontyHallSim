@@ -18,7 +18,7 @@ public class StatsPanel extends JPanel {
         gbc.gridwidth = GridBagConstraints.REMAINDER;
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        setBackground(Color.BLACK);
+        setBackground(Sim.lightBlue);
 
         JLabel totalGames = new JLabel("Total Games: " + Integer.toString(GamePanel.totalGames), SwingConstants.CENTER);
         totalGames.setFont(new Font("Impact", Font.BOLD, 32));
@@ -37,12 +37,12 @@ public class StatsPanel extends JPanel {
 
         JLabel loseSwitch = new JLabel("Number of losses when player switched: " + Integer.toString(GamePanel.loseSwitch), SwingConstants.CENTER);
         loseSwitch.setFont(new Font("Impact", Font.BOLD, 32));
-        loseSwitch.setForeground(Color.RED);
+        loseSwitch.setForeground(Sim.bloodRed);
         add(loseSwitch,gbc);
 
         JLabel loseStay = new JLabel("Number of losses when player stayed: " + Integer.toString(GamePanel.loseStay), SwingConstants.CENTER);
         loseStay.setFont(new Font("Impact", Font.BOLD, 32));
-        loseStay.setForeground(Color.RED);
+        loseStay.setForeground(Sim.bloodRed);
         add(loseStay,gbc);
 
         JButton menu = new JButton("Back to Menu");
