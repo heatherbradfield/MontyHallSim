@@ -60,7 +60,7 @@ public class GamePanel extends JPanel {
         }
         catch (Exception e) {
             System.err.println("MEH");
-            System.out.println(e.getCause().toString());
+            e.printStackTrace();
         }
 
         for (int i = 0; i < Sim.NUM_DOORS; i++) {
@@ -199,7 +199,7 @@ public class GamePanel extends JPanel {
         Random rand = new Random();
         int j;
         for (int i = Sim.NUM_DOORS-1; i>0; i--) {
-            j = rand.nextInt() % (i+1);
+            j = rand.nextInt(i+1);
             swap(i,j);
         }
     }
