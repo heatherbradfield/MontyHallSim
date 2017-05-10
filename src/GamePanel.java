@@ -51,6 +51,7 @@ public class GamePanel extends JPanel {
      */
     public GamePanel(final Sim newSim) {
         clicks = 0;
+        Sim.num_games++;
 
         setBackground(new Color(179,0,255));
 
@@ -59,7 +60,7 @@ public class GamePanel extends JPanel {
         }
         catch (Exception e) {
             System.err.println("MEH");
-            //System.out.println(e.getCause().toString());
+            System.out.println(e.getCause().toString());
         }
 
         for (int i = 0; i < Sim.NUM_DOORS; i++) {
@@ -112,6 +113,7 @@ public class GamePanel extends JPanel {
             }
         });
         add(menu);
+
     }
 
     /**

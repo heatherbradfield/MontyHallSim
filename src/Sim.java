@@ -20,6 +20,7 @@ public class Sim extends JApplet {
     public static final String menuPan = "Menu";
     public static final String gamePan = "Game";
     public static final String statsPan = "Statistics";
+    public static int num_games = 0;
 
     public void init() {
         doors = new Icon[NUM_DOORS];

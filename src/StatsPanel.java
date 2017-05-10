@@ -44,5 +44,17 @@ public class StatsPanel extends JPanel {
         loseStay.setFont(new Font("Impact", Font.BOLD, 32));
         loseStay.setForeground(Color.RED);
         add(loseStay,gbc);
+
+        JButton menu = new JButton("Back to Menu");
+        menu.addActionListener(new ActionListener() {
+            /**
+             * Changes panel back to Main Menu.
+             * @param e the mouseClicked or mousePressed event.
+             */
+            public void actionPerformed(ActionEvent e) {
+                newSim.swapCard(Sim.menuPan);
+            }
+        });
+        add(menu);
     }
 }
