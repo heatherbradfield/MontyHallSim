@@ -1,7 +1,6 @@
 /**
  * Created by Heather on 5/6/17.
  */
-//import com.sun.org.glassfish.external.statistics.Stats;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -21,11 +20,8 @@ public class Sim extends JApplet {
     public static final String gamePan = "Game";
     public static final String statsPan = "Statistics";
     public static int num_games = 0;
-    public static Color brown = new Color(213,196,174);
-    public static Color lightBrown = new Color(244,236,226);
-    public static Color grey = new Color(227,230,228);
     public static Color lightBlue = new Color(190,226,228);
-    public static Color oceanBlue = new Color(111,211,223);
+    public static Color oceanBlue = new Color(70,183,196);
     public static Color bloodRed = new Color(150,0,0);
 
     public void init() {

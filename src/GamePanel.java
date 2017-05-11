@@ -186,7 +186,7 @@ public class GamePanel extends JPanel {
     public void askContestant(int i) {
         question = new JLabel("You chose DOOR " + (i+1) + ". You can switch or stay.", SwingConstants.CENTER);
         question.setFont(new Font("Impact", Font.BOLD, 26));
-        question.setForeground(new Color(46,136,86));
+        question.setForeground(new Color(176,112,200));
         question.setVisible(true);
         add(question);
         validate();
